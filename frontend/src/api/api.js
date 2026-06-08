@@ -52,3 +52,44 @@ export function login(payload) {
 export function fetchMe() {
   return fetch(`${BASE}/auth/me`, { headers: authHeaders() }).then(handle);
 }
+
+// ---- Resources ----
+
+export function listResources({ search = '', category = 'All' } = {}) {
+  const params = new URLSearchParams();
+  if (search) params.set('search', search);
+  if (category && category !== 'All') params.set('category', category);
+  const qs = params.toString();
+  return fetch(`${BASE}/resources${qs ? `?${qs}` : ''}`).then(handle);
+}
+
+export function getResource(id) {
+  return fetch(`${BASE}/resources/${id}`).then(handle);
+}
+
+export function createResource(payload) {
+  return fetch(`${BASE}/resources`, {
+    method: 'POST',
+    headers: authHeaders({ 'Content-Type': 'application/json' }),
+    body: JSON.stringify(payload),
+  }).then(handle);
+}
+
+export function updateResource(id, payload) {
+  return fetch(`${BASE}/resources/${id}`, {
+    method: 'PUT',
+    headers: authHeaders({ 'Content-Type': 'application/json' }),
+    body: JSON.stringify(payload),
+  }).then(handle);
+}
+
+export function deleteResource(id) {
+  return fetch(`${BASE}/resources/${id}`, {
+    method: 'DELETE',
+    headers: authHeaders(),
+  }).then(handle);
+}
+
+export function listCategories() {
+  return fetch(`${BASE}/categories`).then(handle);
+}
