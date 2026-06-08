@@ -30,7 +30,7 @@ export default function LoginPage() {
         <section className="form-page form-page--narrow">
             <h1>Log in</h1>
             <p className="muted">
-                Welcome back. Don’t have an account? <Link to="/register">Sign up</Link>.
+                Welcome back. Don’t have an account? <Link to="/signup">Sign up</Link>.
             </p>
             <form className="form" onSubmit={handleSubmit}>
                 {error && <div className="alert alert--error">{error}</div>}
