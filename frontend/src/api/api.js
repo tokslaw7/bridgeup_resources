@@ -34,7 +34,7 @@ async function handle(res) {
 
 // ---- Auth ----
 export function signup(payload) {
-  return fetch(`${BASE}/auth/register`, {
+  return fetch(`${BASE}/auth/signup`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
