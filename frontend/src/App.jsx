@@ -1,5 +1,6 @@
 import { Routes, Route, Link, NavLink} from 'react-router-dom';
 import SignUp from './pages/SignUp.jsx';
+import Login from './pages/Login.jsx';
 
 
 export default function App() {
@@ -19,6 +20,9 @@ export default function App() {
             <NavLink to="/signup" className="nav-link">
               Sign up
             </NavLink>
+            <NavLink to="/login" className="nav-link">
+              Log in
+            </NavLink>
           </nav>
         </div>
       </header>
@@ -26,7 +30,7 @@ export default function App() {
       <main className="main">
         <Routes>
           <Route path="/signup" element={<SignUp />} />
-
+          <Route path="/login" element={<Login />} />
           <Route path="/" element={<div className="home">
             <h1>Welcome to BridgeUp</h1>
             <p>Find community resources.</p>
