@@ -1,0 +1,32 @@
+# Render Blueprint — deploys the BridgeUp Express API + managed Postgres.
+# Create via Render Dashboard -> New -> Blueprint, pointed at this repo.
+# Docs: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: bridgeup-api
+    runtime: node
+    plan: free
+    rootDir: backend
+    # Schema migration is idempotent (CREATE ... IF NOT EXISTS), so it is safe
+    # to run on every deploy as part of the build.
+    buildCommand: npm install && npm run migrate
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: bridgeup-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      # Set to your Vercel frontend origin(s), comma-separated. No trailing slash.
+      - key: CLIENT_ORIGIN
+        sync: false
+
+databases:
+  - name: bridgeup-db
+    plan: free
