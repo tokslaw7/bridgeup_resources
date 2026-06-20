@@ -1,6 +1,8 @@
-// Thin API client for the BridgeUp backend. Uses the Vite dev proxy (/api -> :4000).
-
-const BASE = '/api';
+// Thin API client for the BridgeUp backend.
+// In dev, leave VITE_API_URL unset to use the Vite proxy (/api -> backend).
+// In production, set VITE_API_URL to the hosted backend origin, e.g. https://bridgeup.vercel.app
+const API_URL = import.meta.env.VITE_API_URL ?? '';
+const BASE = `${API_URL}/api`;
 const TOKEN_KEY = 'bridgeup_token';
 
 export function getToken() {

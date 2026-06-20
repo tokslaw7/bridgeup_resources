@@ -11,9 +11,6 @@ CREATE TABLE IF NOT EXISTS resources (
   title       TEXT        NOT NULL CHECK (char_length(title) BETWEEN 1 AND 200),
   description TEXT        NOT NULL CHECK (char_length(description) BETWEEN 1 AND 5000),
   category    TEXT        NOT NULL,
-  location    TEXT,
-  contact     TEXT,
-  url         TEXT,
   owner_id    INTEGER     REFERENCES users (id) ON DELETE CASCADE,
   created_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
   updated_at  TIMESTAMPTZ NOT NULL DEFAULT now()

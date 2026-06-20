@@ -25,6 +25,21 @@ BridgeUp is a community resource board for families, caregivers, and advocates s
 - `frontend/` contains the React UI, routing, API client, and resource forms.
 - `docker-compose.yml` starts a local PostgreSQL container on port `5440`.
 
+## Architecture Diagram
+
+```mermaid
+flowchart LR
+	U[User Browser] --> F[Frontend: React + Vite]
+	F -->|GET /api/resources\nGET /api/categories| B[Backend: Express API]
+	F -->|POST /api/auth/signup\nPOST /api/auth/login\nGET /api/auth/me| A[Auth Routes]
+	F -->|POST /api/resources\nPUT /api/resources/:id\nDELETE /api/resources/:id| R[Resource Routes]
+	A --> B
+	R --> B
+	B -->|SQL queries| D[(PostgreSQL)]
+	B -->|JWT + ownership checks| M[Auth Middleware]
+	M --> B
+```
+
 ## Setup
 
 ### Prerequisites
@@ -116,6 +131,9 @@ The seed data creates a demo user:
 
 - Email: `toks@bridgeup.local`
 - Password: `password123`
+
+## Production Deployment URL
+`https://vercel.com/lantas-projects-e5cc5b44/bridgeup-resources-u9ez`
 
 ## API Overview
 

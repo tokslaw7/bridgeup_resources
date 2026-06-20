@@ -76,7 +76,7 @@ router.get('/', async (req, res, next) => {
     if (search && search.trim()) {
       params.push(`%${search.trim()}%`);
       conditions.push(
-        `(r.title ILIKE $${params.length} OR r.description ILIKE $${params.length} OR r.location ILIKE $${params.length})`,
+        `(r.title ILIKE $${params.length} OR r.description ILIKE $${params.length})`,
       );
     }
 
